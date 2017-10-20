@@ -1,5 +1,9 @@
 package calculadoraip;
-
+/**
+ * 
+ * @author esteban
+ *
+ */
 public class MascaraDeRed {
 	int primerOcteto;
 	int	segundoOcteto;
@@ -33,6 +37,7 @@ public class MascaraDeRed {
 	public void setSegundoOcteto(int segundoOcteto) {
 		this.segundoOcteto = segundoOcteto;
 	}
+	
 
 	public int getTecerOcteto() {
 		return tecerOcteto;
