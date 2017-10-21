@@ -6,7 +6,13 @@ public class Utilidades {
 	private static boolean estaEntre(int valor, int limInf, int limSup){
 		return (limInf <= valor && valor <= limSup );
 	}
-	
+	public static void subnetting(Ipv4 ip, int cantidadSubredes, MascaraDeRed mascaraDeRed) {
+		System.out.println("IPv4: " + ip);
+		System.out.println("Mascara de red:  " + mascaraDeRed);
+		System.out.println("La clase de la IP es: " + Utilidades.obtenerclaseIp(ip));
+		System.out.println("El valor de n es | n = " + Utilidades.obtenerN(4));
+		obtenerMascaraSubred(obtenerN(cantidadSubredes), mascaraDeRed);
+	}
 	
 	public static char obtenerclaseIp(Ipv4 ip) {
 		if(estaEntre(ip.primerOcteto, 0, 127 )) {
