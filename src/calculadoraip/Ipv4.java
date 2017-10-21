@@ -2,12 +2,12 @@ package calculadoraip;
 
 
 public class Ipv4{
-	int primerOcteto;
-	int	segundoOcteto;
-	int tecerOcteto;
-	int cuartoOcteto;
-	char clase;
-	MascaraDeRed mascaraDeRed;
+	private int primerOcteto;
+	private int	segundoOcteto;
+	private int tecerOcteto;
+	private int cuartoOcteto;
+	private char clase;
+	private MascaraDeRed mascaraDeRed;
 	
 	
 	public Ipv4() {

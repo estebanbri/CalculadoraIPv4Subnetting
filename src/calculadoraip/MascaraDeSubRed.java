@@ -1,20 +1,16 @@
 package calculadoraip;
-/**
- * 
- * @author esteban
- *
- */
-public class MascaraDeRed {
+
+public class MascaraDeSubRed {
 	private int primerOcteto;
 	private int	segundoOcteto;
 	private int tecerOcteto;
 	private int cuartoOcteto;
 	
-	public MascaraDeRed() {
+	public MascaraDeSubRed() {
 		super();
 	}
 
-	public MascaraDeRed(int primerOcteto, int segundoOcteto, int tecerOcteto, int cuartoOcteto) {
+	public MascaraDeSubRed(int primerOcteto, int segundoOcteto, int tecerOcteto, int cuartoOcteto) {
 		super();
 		this.primerOcteto = primerOcteto;
 		this.segundoOcteto = segundoOcteto;
