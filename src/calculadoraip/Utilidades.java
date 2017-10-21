@@ -18,20 +18,23 @@ public class Utilidades {
 		System.out.println("Mascara de subred (decimal)= " + conversorBitsAdecimales(arrayCharBit));
 		System.out.println("Hosts por subred: " + obtenerCantHostPorSubred(arrayCharBit) + " hosts");
 		List<Ipv4> listaIpv4 = calculoRangoIpGeneradasPorSubRed(ip , conversorBitsAdecimales(arrayCharBit) ,  cantidadSubredes);
+		mostrarListaIPs(listaIpv4);
+		
+	}
+	private static void mostrarListaIPs(List<Ipv4> lista) {
 
-		Iterator<Ipv4> itr = listaIpv4.iterator();
-	    int asd=0;
+		Iterator<Ipv4> itr = lista.iterator();
+	    int count=0;
 	    System.out.println("          Desde            Hasta");
 		while (itr.hasNext()) {
-			asd++;
-			System.out.print("Red n° "+ asd);
+			count++;
+			System.out.print("Red n° "+ count);
 			for(int i = 0; i<2; i++) {
 				if(!itr.hasNext()) break;
 				System.out.print(" "+itr.next() + " ");
 			}
 			System.out.println();
 	    }
-		
 	}
 	
 	private static char obtenerclaseIp(Ipv4 ip) {
