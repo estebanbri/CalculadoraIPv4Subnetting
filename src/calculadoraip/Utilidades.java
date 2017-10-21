@@ -69,7 +69,7 @@ public class Utilidades {
 
 	private static char[] obtenerMascaraSubred(int n, MascaraDeRed mascaraDeRed) {
 		
-		String mascaraRed = conversorDecimalAbits(mascaraDeRed);
+		String mascaraRed = obtenerMascaraDeRedEnBits(mascaraDeRed);
 		
 		char[] arrayCharBit = mascaraRed.toCharArray();
 		
@@ -93,7 +93,7 @@ public class Utilidades {
 		return arrayCharBit;
 	}
 	
-	private static String conversorDecimalAbits(MascaraDeRed mascaraDeRed) {
+	private static String obtenerMascaraDeRedEnBits(MascaraDeRed mascaraDeRed) {
 		String mascaraDeRedString = mascaraDeRed.toString();
 		String patron = Pattern.quote(".");
 		String[] octetos = mascaraDeRedString.split(patron);
