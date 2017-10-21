@@ -4,7 +4,7 @@ package calculadoraip;
 public class Ipv4{
 	private int primerOcteto;
 	private int	segundoOcteto;
-	private int tecerOcteto;
+	private int tercerOcteto;
 	private int cuartoOcteto;
 	private char clase;
 	private MascaraDeRed mascaraDeRed;
@@ -18,7 +18,7 @@ public class Ipv4{
 		super();
 		this.primerOcteto = primerOcteto;
 		this.segundoOcteto = segundoOcteto;
-		this.tecerOcteto = tecerOcteto;
+		this.tercerOcteto = tecerOcteto;
 		this.cuartoOcteto = cuartoOcteto;
 	}
 
@@ -38,12 +38,12 @@ public class Ipv4{
 		this.segundoOcteto = segundoOcteto;
 	}
 
-	public int getTecerOcteto() {
-		return tecerOcteto;
+	public int getTercerOcteto() {
+		return tercerOcteto;
 	}
 
-	public void setTecerOcteto(int tecerOcteto) {
-		this.tecerOcteto = tecerOcteto;
+	public void setTercerOcteto(int tecerOcteto) {
+		this.tercerOcteto = tecerOcteto;
 	}
 
 	public int getCuartoOcteto() {
@@ -74,7 +74,7 @@ public class Ipv4{
 	public String toString() {
 		return  primerOcteto + "." + 
 				segundoOcteto + "." + 
-				tecerOcteto + "." +
+				tercerOcteto + "." +
 				cuartoOcteto;
 	}
 	
