@@ -145,48 +145,69 @@ public class Utilidades {
 		System.out.println("Cantidad de saltos: " + numeroSaltos);
 		List<Ipv4> listaIpv4 = new ArrayList<>();
 		
-		switch(cantidadSubredes) {
-		case 1: {
-				
-				break;
+		switch (ip.getClase()) {
+		case 'A': {
+			int j = 0;
+
+			for (int i = 0; i < cantidadSubredes; i++) {
+				for (int x = 0; x < 2; x++) {
+					Ipv4 ipNueva = new Ipv4();
+					ipNueva.setPrimerOcteto(ip.getPrimerOcteto());
+					ipNueva.setSegundoOcteto(j);
+					ipNueva.setTecerOcteto(ip.getTecerOcteto());
+					ipNueva.setCuartoOcteto(ip.getCuartoOcteto());
+					listaIpv4.add(ipNueva);
+					if (x == 1)
+						break;
+					j = j + (numeroSaltos - 1);
 				}
-		case 2: {
-			
-				break;
+				j++;
+			}
+			break;
+		}
+		case 'B': {
+			int j = 0;
+
+			for (int i = 0; i < cantidadSubredes; i++) {
+				for (int x = 0; x < 2; x++) {
+					Ipv4 ipNueva = new Ipv4();
+					ipNueva.setPrimerOcteto(ip.getPrimerOcteto());
+					ipNueva.setSegundoOcteto(ip.getSegundoOcteto());
+					ipNueva.setTecerOcteto(j);
+					ipNueva.setCuartoOcteto(ip.getCuartoOcteto());
+					listaIpv4.add(ipNueva);
+					if (x == 1)
+						break;
+					j = j + (numeroSaltos - 1);
 				}
-		case 3: {
-			
-				break;
+				j++;
+			}
+			break;
+		}
+
+		case 'C': {
+			int j = 0;
+
+			for (int i = 0; i < cantidadSubredes; i++) {
+				for (int x = 0; x < 2; x++) {
+					Ipv4 ipNueva = new Ipv4();
+					ipNueva.setPrimerOcteto(ip.getPrimerOcteto());
+					ipNueva.setSegundoOcteto(ip.getSegundoOcteto());
+					ipNueva.setTecerOcteto(ip.getTecerOcteto());
+					ipNueva.setCuartoOcteto(j);
+					listaIpv4.add(ipNueva);
+					if (x == 1)
+						break;
+					j = j + (numeroSaltos - 1);
 				}
-		case 4: {
-				switch(ip.getClase()) {
-					case 'A': ;break;
-					case 'B': {
-								int j = 0;
-							
-								for(int i = 0; i < cantidadSubredes;i++){
-									for(int x=0; x < 2 ; x++) {
-										Ipv4 ipNueva = new Ipv4();
-										ipNueva.setPrimerOcteto(ip.getPrimerOcteto());
-										ipNueva.setSegundoOcteto(ip.getSegundoOcteto());
-										ipNueva.setTecerOcteto(j);
-										ipNueva.setCuartoOcteto(ip.getCuartoOcteto());
-										listaIpv4.add(ipNueva);
-										if(x==1) break;
-										j = j + (numeroSaltos - 1);
-									}	
-									j++;
-								}
-								break;
-							  }
-					
-					case 'C': ;break;
-				}
-				break;
-				}
+				j++;
+			}
+			break;
+		}
+
 		}
 		return listaIpv4;
-		
+
 	}
 	
 	
