@@ -13,12 +13,13 @@ public class Utilidades {
 		System.out.println("IPv4: " + ip);
 		System.out.println("Mascara de red:  " + mascaraDeRed);
 		System.out.println("La clase de la IP es: " + Utilidades.obtenerclaseIp(ip));
-		System.out.println("El valor de n es | n = " + Utilidades.obtenerN(4));
+		System.out.println("El valor de n es | n = " + Utilidades.obtenerN(cantidadSubredes));
 		char[] arrayCharBit = obtenerMascaraSubred(obtenerN(cantidadSubredes), mascaraDeRed);
 		System.out.println("Mascara de subred (decimal)= " + conversorBitsAdecimales(arrayCharBit));
 		System.out.println("RED IP: " + obtenerRedIP(ip).toString());
 		System.out.println("BROADCAST: " + obtenerBroadCast(ip).toString());
 		mostrarRangoHostMinMax(obtenerRangoHostMinMax(ip));
+		System.out.println("Cantidad de host: " + cantidadHost(arrayCharBit,Utilidades.obtenerN(cantidadSubredes)) +  "hosts");
 		System.out.println("Hosts por subred: " + obtenerCantHostPorSubred(arrayCharBit) + " hosts");
 		List<Ipv4> listaIpv4 = calculoRangoIpGeneradasPorSubRed(ip , conversorBitsAdecimales(arrayCharBit) ,  cantidadSubredes);
 		mostrarListaIPs(listaIpv4);
@@ -141,7 +142,7 @@ public class Utilidades {
 		}
 		return ipv4;
 	}
-
+	
 	private static Ipv4 obtenerBroadCast(Ipv4 ip) {
 		Ipv4 ipv4 = new Ipv4(ip.getPrimerOcteto(),ip.getSegundoOcteto(),ip.getTercerOcteto(),ip.getCuartoOcteto());
 		ipv4.setClase(ip.getClase());
@@ -166,32 +167,45 @@ public class Utilidades {
 	}
 
 	private static List<Ipv4> obtenerRangoHostMinMax(Ipv4 ip) {
-		Ipv4 ipv4 = new Ipv4(ip.getPrimerOcteto(),ip.getSegundoOcteto(),ip.getTercerOcteto(),ip.getCuartoOcteto());
-		ipv4.setClase(ip.getClase());
+		Ipv4 ipMin = new Ipv4(ip.getPrimerOcteto(),ip.getSegundoOcteto(),ip.getTercerOcteto(),ip.getCuartoOcteto());
+		Ipv4 ipMax = new Ipv4(ip.getPrimerOcteto(),ip.getSegundoOcteto(),ip.getTercerOcteto(),ip.getCuartoOcteto());
+		ipMax.setClase(ip.getClase());
 		List<Ipv4> min_max = new ArrayList<>();
-		ipv4.setCuartoOcteto(1);
-		min_max.add(ipv4);
-		switch (ipv4.getClase()) {
+		ipMin.setCuartoOcteto(1);
+		min_max.add(ipMin);
+		switch (ipMax.getClase()) {
 		case 'A': {
-			ipv4.setSegundoOcteto(255);
-			ipv4.setTercerOcteto(255);
-			ipv4.setCuartoOcteto(254);
-			min_max.add(ipv4);
+			ipMax.setSegundoOcteto(255);
+			ipMax.setTercerOcteto(255);
+			ipMax.setCuartoOcteto(254);
+			min_max.add(ipMax);
 			break;
 		}
 		case 'B': {
-			ipv4.setTercerOcteto(255);
-			ipv4.setCuartoOcteto(254);
-			min_max.add(ipv4);
+			ipMax.setTercerOcteto(255);
+			ipMax.setCuartoOcteto(254);
+			min_max.add(ipMax);
 			break;
 		}
 		case 'C': {
-			ipv4.setCuartoOcteto(254);
-			min_max.add(ipv4);
+			ipMax.setCuartoOcteto(254);
+			min_max.add(ipMax);
 			break;
 		}
 		}
 		return min_max;
+	}
+	
+	private static double cantidadHost(char[] arrayCharBit,int n) {
+		
+		double cantidadHost = 0;
+		switch(n) {
+		case 1: {cantidadHost=(Math.pow(2, 9))-2;}
+		case 2: {cantidadHost=(Math.pow(2, 8))-2;}
+		case 3: {cantidadHost=(Math.pow(2, 7))-2;}
+		}
+		
+		return cantidadHost;
 	}
 	
 	private static MascaraDeSubRed conversorBitsAdecimales(char[] bits) {
