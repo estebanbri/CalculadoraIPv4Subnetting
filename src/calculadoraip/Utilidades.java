@@ -19,7 +19,7 @@ public class Utilidades {
 		System.out.println("RED IP: " + obtenerRedIP(ip).toString());
 		System.out.println("BROADCAST: " + obtenerBroadCast(ip).toString());
 		mostrarRangoHostMinMax(obtenerRangoHostMinMax(ip));
-		System.out.println("Cantidad de host: " + cantidadHost(arrayCharBit,Utilidades.obtenerN(cantidadSubredes)) +  "hosts");
+
 		System.out.println("Hosts por subred: " + obtenerCantHostPorSubred(arrayCharBit) + " hosts");
 		List<Ipv4> listaIpv4 = calculoRangoIpGeneradasPorSubRed(ip , conversorBitsAdecimales(arrayCharBit) ,  cantidadSubredes);
 		mostrarListaIPs(listaIpv4);
@@ -69,9 +69,9 @@ public class Utilidades {
 
 	//obtiene el n  para que se cumpla la expresion (2 elevado a n) -2 <= cantidadSubredes
 	private static int obtenerN(int cantidadSubredes) {
-		int n = 0;
+		int n = 1;
 		
-		while((Math.pow(2, n)-2)<=cantidadSubredes) {
+		while(!((Math.pow(2, n)-2)>=cantidadSubredes)) {
 			n++;
 		}
 		
@@ -88,6 +88,7 @@ public class Utilidades {
 		for(char c:arrayCharBit) {System.out.print(c);}
 		System.out.println("");
 		
+		System.out.println("Cantidad de host: " + cantidadHost(arrayCharBit) + " hosts" );
 		
 		for(int i=0; i<=arrayCharBit.length;i++) {
 			if(arrayCharBit[i] == '0'){
@@ -196,16 +197,16 @@ public class Utilidades {
 		return min_max;
 	}
 	
-	private static double cantidadHost(char[] arrayCharBit,int n) {
+	private static String cantidadHost(char[] arrayCharBit) {
 		
-		double cantidadHost = 0;
-		switch(n) {
-		case 1: {cantidadHost=(Math.pow(2, 9))-2;}
-		case 2: {cantidadHost=(Math.pow(2, 8))-2;}
-		case 3: {cantidadHost=(Math.pow(2, 7))-2;}
+		int cantidadHost = 0;
+		for(char c: arrayCharBit) {
+			if(c=='0') {
+				cantidadHost++;
+			}
 		}
-		
-		return cantidadHost;
+		Integer i  = (int)(Math.pow(2, cantidadHost)) -2;
+		return Integer.toString(i);
 	}
 	
 	private static MascaraDeSubRed conversorBitsAdecimales(char[] bits) {
@@ -274,7 +275,12 @@ public class Utilidades {
 					ipNueva.setPrimerOcteto(ip.getPrimerOcteto());
 					ipNueva.setSegundoOcteto(ip.getSegundoOcteto());
 					ipNueva.setTercerOcteto(j);
-					ipNueva.setCuartoOcteto(ip.getCuartoOcteto());
+					if(x==0) {
+						ipNueva.setCuartoOcteto(ip.getCuartoOcteto());
+					}else {
+						ipNueva.setCuartoOcteto(255);
+					}
+					
 					listaIpv4.add(ipNueva);
 					if (x == 1)
 						break;
